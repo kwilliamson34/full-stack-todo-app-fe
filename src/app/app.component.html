@@ -1,8 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
   <h1 class="page-title">My Lists</h1>
-  <app-todo-list title="Work"></app-todo-list>
-  <app-todo-list title="Life"></app-todo-list>
+  <app-todo-list
+    *ngFor="let list of todoLists"
+    id={{list.id}}
+    title={{list.title}}
+    [items]="list.items">
+  </app-todo-list>
 </div>
 
 <router-outlet></router-outlet>

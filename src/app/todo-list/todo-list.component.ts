@@ -8,9 +8,10 @@ import moment from 'moment';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
+  @Input() id: string;
   @Input() title: string;
+  @Input() items: TodoItem[];
   date: string = moment().format("M/D/YY");
-  items: TodoItem[] = [];
 
   constructor() {
   }
@@ -21,6 +22,7 @@ export class TodoListComponent implements OnInit {
   addItem(title) {
     this.items.push({
       id: moment().toString(),
+      listId: this.id,
       title,
       done: false
     })
