@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TodoService } from './todo.service';
 import { TodoList } from '../todo-list';
-import { Observable } from 'rxjs';
+import { TodoItem } from '../todo-item';
 
 @Component({
   selector: 'app-root',
@@ -9,21 +9,34 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  todoLists: TodoList[];
+  todoLists: TodoList[] = [];
+  todoItems: TodoItem[] = [];
 
   constructor(private todoService: TodoService) {
   }
 
   ngOnInit() {
-    this.getLists();
+    this.refreshLists();
   }
 
-  getLists(): void {
+  refreshLists(): void {
+    this.todoLists = [];
+    this.todoItems = [];
     this.todoService.getLists()
-      .subscribe(todoLists => {
-        this.todoLists = todoLists;
-        console.log('LISTS',this.todoLists);
+      .subscribe(response => {
+        this.todoLists = response;
+        this.todoLists.map(list => {
+          this.todoService.getListItems(list.id)
+            .subscribe(items => {
+              items.forEach(item => {
+                this.todoItems.push(item);
+              })
+            })
+        })
       });
-    
+  }
+
+  getItems(listId: string): TodoItem[] {
+    return this.todoItems.filter(item => item.listId === listId);
   }
 }
