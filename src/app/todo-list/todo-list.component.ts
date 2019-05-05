@@ -20,22 +20,25 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
   }
 
-  addItem(title): void {
+  addItem(title: string): void {
     const newItem = {
-      id: `${title}-${this.id}-${moment().unix()}`,
+      id: `${this.id}-${moment().unix()}`,
       title,
       listId: this.id,
+      done: false
     };
 
-    this.todoService.addItem(newItem)
+    this.todoService.addOrUpdateItem(newItem)
       .subscribe();
   }
 
-  updateItem({id, title}) {
-    this.items.find(item => item.id == id).title = title;
+  updateItem(item: TodoItem) {
+    this.todoService.addOrUpdateItem(item)
+      .subscribe();
   }
 
-  deleteItem(id) {
-    this.items = this.items.filter(item => item.id !== id);
+  deleteItem(id: string) {
+    this.todoService.deleteItem(id)
+      .subscribe();
   }
 }

@@ -5,7 +5,7 @@
     *ngFor="let list of todoLists"
     id={{list.id}}
     title={{list.title}}
-    [items]="getItems(list.id)">
+    [items]="todoItems | filter:{'key': 'listId', 'value': list.id}">
   </app-todo-list>
 </div>
 

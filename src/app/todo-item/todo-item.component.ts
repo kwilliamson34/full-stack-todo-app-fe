@@ -31,10 +31,8 @@ export class TodoItemComponent implements OnInit {
     this.delete.emit(this.item.id);
   }
 
-  updateItem($event) {
-    this.update.emit({
-      id: this.item.id,
-      title: $event
-    });
+  updateItem($event: string) {
+    const updatedItem = Object.assign({}, this.item, {title: $event})
+    this.update.emit(updatedItem);
   }
 }

@@ -35,8 +35,4 @@ export class AppComponent {
         })
       });
   }
-
-  getItems(listId: string): TodoItem[] {
-    return this.todoItems.filter(item => item.listId === listId);
-  }
 }
