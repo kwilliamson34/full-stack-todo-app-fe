@@ -2,20 +2,20 @@
   <input
     type="checkbox"
     [checked]="item.done"
-    (click)="onClickItem()"
+    (click)="updateDone()"
     aria-label="Check item off"
   />
   &nbsp;
   <span
     *ngIf="!isEditing"
     [style.text-decoration]="item.done ? 'line-through' : ''"
-    (click)="onClickItem()">
+    (click)="updateDone()">
     {{item.title}}
   </span>
   <app-todo-item-form
     *ngIf="isEditing"
     [title]="item.title"
-    (save)="updateItem($event)"
+    (save)="updateTitle($event)"
     (exit)="onClickEdit()">
   </app-todo-item-form>
   <button *ngIf="!isEditing" (click)="onClickEdit()">Edit</button>

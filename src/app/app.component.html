@@ -2,10 +2,10 @@
 <div>
   <h1 class="page-title">My Lists</h1>
   <app-todo-list
-    *ngFor="let list of todoLists"
+    *ngFor="let list of todoLists | async"
     id={{list.id}}
     title={{list.title}}
-    [items]="todoItems | filter:{'key': 'listId', 'value': list.id}">
+    [items]="todoItems">
   </app-todo-list>
 </div>
 

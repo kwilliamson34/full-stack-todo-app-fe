@@ -21,6 +21,10 @@ export class TodoService {
     return this.http.get<TodoList[]>('http://localhost:8080/api/lists', httpOptions);
   }
 
+  getAllItems(): Observable<TodoItem[]> {
+    return this.http.get<TodoItem[]>(`http://localhost:8080/api/items`, httpOptions);
+  }
+
   getListItems(id: string): Observable<TodoItem[]> {
     return this.http.get<TodoItem[]>(`http://localhost:8080/api/lists/${id}`, httpOptions);
   }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TodoService } from './todo.service';
 import { TodoList } from '../todo-list';
 import { TodoItem } from '../todo-item';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,30 +10,14 @@ import { TodoItem } from '../todo-item';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  todoLists: TodoList[] = [];
-  todoItems: TodoItem[] = [];
+  todoLists: Observable<TodoList[]>;
+  todoItems: Observable<TodoItem[]>;
 
   constructor(private todoService: TodoService) {
   }
 
   ngOnInit() {
-    this.refreshLists();
-  }
-
-  refreshLists(): void {
-    this.todoLists = [];
-    this.todoItems = [];
-    this.todoService.getLists()
-      .subscribe(response => {
-        this.todoLists = response;
-        this.todoLists.map(list => {
-          this.todoService.getListItems(list.id)
-            .subscribe(items => {
-              items.forEach(item => {
-                this.todoItems.push(item);
-              })
-            })
-        })
-      });
+    this.todoLists = this.todoService.getLists();
+    this.todoItems = this.todoService.getAllItems();
   }
 }

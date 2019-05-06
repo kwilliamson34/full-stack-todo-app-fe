@@ -2,9 +2,9 @@
   <h2>{{title}} ({{date}})</h2>
   <p>Add a new item</p>
   <app-todo-item-form (save)="addItem($event)"></app-todo-item-form>
-  <p>There are {{items ? items.length : 0}} items in the list.</p>
+  <p>There are {{localItems.length}} items in the list.</p>
   <ul>
-    <li *ngFor="let item of items">
+    <li *ngFor="let item of localItems">
       <app-todo-item
         [item]="item"
         (update)="updateItem($event)"
