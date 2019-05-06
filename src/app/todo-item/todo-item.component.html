@@ -1,0 +1,23 @@
+<div>
+  <input
+    type="checkbox"
+    [checked]="item.done"
+    (click)="updateDone()"
+    aria-label="Check item off"
+  />
+  &nbsp;
+  <span
+    *ngIf="!isEditing"
+    [style.text-decoration]="item.done ? 'line-through' : ''"
+    (click)="updateDone()">
+    {{item.title}}
+  </span>
+  <app-todo-item-form
+    *ngIf="isEditing"
+    [title]="item.title"
+    (save)="updateTitle($event)"
+    (exit)="onClickEdit()">
+  </app-todo-item-form>
+  <button *ngIf="!isEditing" (click)="onClickEdit()">Edit</button>
+  <button *ngIf="!isEditing" (click)="onClickDelete()">Delete</button>
+</div>
