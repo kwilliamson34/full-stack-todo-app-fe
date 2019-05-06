@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { TodoItem } from '../../todo-item';
-import moment from 'moment';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,7 +12,6 @@ export class TodoListComponent implements OnInit {
   @Input() id: string;
   @Input() title: string;
   @Input() items: Observable<TodoItem[]>;
-  date: string = moment().format("M/D/YY");
   localItems: TodoItem[] = [];
 
   constructor(private todoService: TodoService) {
@@ -30,7 +28,7 @@ export class TodoListComponent implements OnInit {
 
   addItem(title: string): void {
     const newItem = {
-      id: `item-${this.id}-${moment().unix()}`,
+      id: `item-${this.id}-${Date.now()}`,
       title,
       listId: this.id,
       done: false

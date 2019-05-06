@@ -7,9 +7,6 @@ import {
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
-import * as moment from 'moment';
-global.moment = moment;
-
 declare const require: any;
 
 // First, initialize the Angular testing environment.
