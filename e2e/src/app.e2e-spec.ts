@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display title', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('My Lists');
+    expect(page.getTitleText()).toEqual('Welcome to todo-app!');
   });
 
   afterEach(async () => {
